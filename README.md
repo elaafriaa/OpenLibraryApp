@@ -57,3 +57,15 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+---
+
+## Changements visuels apportés
+
+- Fond global en dégradé bleu et centrage de l'application (`src/styles.css`, wrapper `.app-shell`). ✅
+- Barre de recherche modernisée : recherche par Titre/Auteur, champ Année, bouton Effacer et styles accessibles (`src/app/components/search-bar/*`). ✅
+- Détails du livre améliorés : badges de métadonnées, CTA vers OpenLibrary et meilleur espacement (`src/app/components/book-details/*`). ✅
+- Ajout de `searchByAuthor` dans `BookService` pour la recherche par auteur (`src/app/services/book.ts`). ✅
+- Ajout du système de favoris (persisté en localStorage) avec bouton favoris dans les cartes (`book-list`) et sur la page détails (`book-details`). ✅
+
+Test rapide: lancer `ng serve` et vérifier la page d'accueil, la barre de recherche et la page de détails d'un livre.

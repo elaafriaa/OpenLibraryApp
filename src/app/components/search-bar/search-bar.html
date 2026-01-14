@@ -1,0 +1,22 @@
+<div class="search-container">
+  <div class="search-form" role="search" aria-label="Barre de recherche">
+    <label class="sr-only" for="fieldSelect">Champ</label>
+    <select id="fieldSelect" #fieldSelect aria-label="Type de recherche">
+      <option value="title">Titre</option>
+      <option value="author">Auteur</option>
+    </select>
+
+    <input id="queryInput" type="text" placeholder="Rechercher par titre ou auteur..." #queryInput aria-label="Requête de recherche" (keyup.enter)="onSearch(fieldSelect.value, queryInput.value, yearInput.value)">
+
+    <input id="yearInput" type="number" placeholder="Année (ex: 2024)" #yearInput aria-label="Année de publication">
+
+    <div class="actions">
+      <button class="btn-primary" (click)="onSearch(fieldSelect.value, queryInput.value, yearInput.value)">Rechercher</button>
+      <button class="btn-clear" type="button" (click)="clear(queryInput, yearInput)">Effacer</button>
+    </div>
+  </div>
+
+  <div class="search-help">
+    <small>Astuce: utilisez l'option <strong>Auteur</strong> pour chercher un auteur précis, et le champ Année pour filtrer.</small>
+  </div>
+</div>

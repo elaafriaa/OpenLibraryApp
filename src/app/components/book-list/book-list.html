@@ -1,0 +1,34 @@
+<div class="container">
+  <h2>Résultats de la bibliothèque</h2> <div class="book-grid">
+    @for (book of booksList; track book.key) {
+      <div class="book-card">
+        
+        <div class="cover-container">
+          <img [src]="'https://covers.openlibrary.org/b/id/' + (book.cover_id || book.cover_i) + '-M.jpg'" 
+               alt="Couverture de {{book.title}}">
+        </div>
+
+        <div class="book-info">
+          <h3>{{ book.title }}</h3>
+          <p>Année : {{ book.first_publish_year }}</p>
+          
+          <div class="card-actions">
+            <button class="fav-btn" [class.active]="isFavorite(book)" (click)="toggleFavorite(book); $event.stopPropagation(); $event.preventDefault();" aria-label="Basculer favoris">
+              <span *ngIf="isFavorite(book)">♥</span>
+              <span *ngIf="!isFavorite(book)">♡</span>
+            </button>
+
+            <button class="btn-detail" [routerLink]="['/book', book.key.split('/')[2]]">
+              Voir détails
+            </button>
+          </div>
+        </div>
+
+      </div>
+    } @empty {
+      <div class="no-results">
+        <p>Aucun livre trouvé. Essayez une autre recherche.</p>
+      </div>
+    }
+  </div>
+</div>

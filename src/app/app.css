@@ -1,0 +1,12 @@
+/* Small helpers for buttons and layout */
+.btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.08);
+  color: var(--text-dark);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Ensure router content is centered in the shell */
+router-outlet { display: block; }

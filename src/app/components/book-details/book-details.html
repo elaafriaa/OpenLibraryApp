@@ -1,0 +1,75 @@
+<div *ngIf="book" class="details-container">
+  
+  <button routerLink="/" class="btn-back">← Retour à la liste</button>
+
+  <div class="book-header">
+    <h2>{{ book.title }}</h2>
+    <h3 *ngIf="book.subtitle">{{ book.subtitle }}</h3>
+  </div>
+
+  <div class="book-content">
+    <div class="book-image">
+      <img *ngIf="book.covers" 
+           [src]="'https://covers.openlibrary.org/b/id/' + book.covers[0] + '-L.jpg'" 
+           alt="Couverture de {{ book.title }}">
+      
+      <div *ngIf="!book.covers" class="no-image">
+        Pas d'image disponible
+      </div>
+    </div>
+
+    <div class="book-info">
+      <div class="book-meta">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <strong>Auteur(s)</strong>
+            <div class="meta-value" *ngIf="book.authors && book.authors.length">
+              <span class="author" *ngFor="let a of book.authors; let i = index">{{ a.name }}<span *ngIf="i < (book.authors.length - 1)">, </span></span>
+            </div>
+          </div>
+
+          <div class="meta-item" *ngIf="book.first_publish_date">
+            <strong>Publié</strong>
+            <div class="meta-value">{{ book.first_publish_date }}</div>
+          </div>
+
+          <div class="meta-item" *ngIf="book.created?.value">
+            <strong>Créé</strong>
+            <div class="meta-value">{{ book.created?.value | date:'longDate' }}</div>
+          </div>
+        </div>
+
+        <div class="chips" *ngIf="book.subjects && book.subjects.length">
+          <span class="chip" *ngFor="let s of book.subjects | slice:0:6" (click)="onSubjectClick(s)">{{ s }}</span>
+          <span class="chip more" *ngIf="book.subjects.length > 6">+{{ book.subjects.length - 6 }}</span>
+        </div>
+      </div>
+
+      <div class="meta-grid small">
+        <div>
+          <strong>Dernière modification</strong>
+          <div class="meta-value">{{ book.last_modified?.value | date:'longDate' }}</div>
+        </div>
+      </div>
+
+      <div class="description">
+        <strong>Description :</strong>
+        <p *ngIf="!showFullDescription">{{ shortDescription }}</p>
+        <p *ngIf="showFullDescription">{{ descriptionText }}</p>
+        <button class="link-btn" *ngIf="descriptionText && descriptionText.length > 350" (click)="toggleDescription()">{{ showFullDescription ? 'Afficher moins' : 'Afficher la suite' }}</button>
+      </div> 
+
+      <div class="action-row">
+        <a class="action-btn" [href]="'https://openlibrary.org' + book.key" target="_blank" rel="noopener">Voir sur OpenLibrary</a>
+        <button class="action-btn" (click)="toggleFavorite()">
+          <span *ngIf="fav">♥ Retirer des favoris</span>
+          <span *ngIf="!fav">♡ Ajouter aux favoris</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!book" class="loading">
+  <p>Chargement des détails du livre...</p>
+</div>

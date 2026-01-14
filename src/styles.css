@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary: #0b66a3; /* Bleu principal */
+  --secondary: #6c757d;
+  --bg-light: #f8f9fa;
+  --text-dark: #212529;
+  --shadow: 0 8px 20px rgba(2,6,23,0.35);
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg,#0b66a3 0%,#003f7f 100%);
+  color: var(--text-dark);
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.app-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+} 
