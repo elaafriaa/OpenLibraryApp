@@ -4,7 +4,11 @@
   padding: 20px;
 }
 
-.book-grid {
+/* Résultats: texte en blanc pour lisibilité */
+.container h2 { color: #ffffff; margin-bottom: 16px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+
+/* Titles: limit height to two lines */
+.book-info h3 { height: 40px; overflow: hidden; }.book-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 30px;
@@ -29,6 +33,11 @@
   width: 100%;
   height: 300px;
   object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.cover-container img:hover {
+  transform: scale(1.03);
 }
 
 .book-info {

@@ -4,8 +4,8 @@
       <div class="book-card">
         
         <div class="cover-container">
-          <img [src]="'https://covers.openlibrary.org/b/id/' + (book.cover_id || book.cover_i) + '-M.jpg'" 
-               alt="Couverture de {{book.title}}">
+          <img (click)="openDetails(book)" (keydown.enter)="openDetails(book)" [src]="'https://covers.openlibrary.org/b/id/' + (book.cover_id || book.cover_i) + '-M.jpg'" 
+               alt="Couverture de {{book.title}}" role="button" tabindex="0">
         </div>
 
         <div class="book-info">

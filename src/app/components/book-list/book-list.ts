@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book'; 
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,26 +15,15 @@ export class BookList implements OnInit {
   booksList: any[] = [];
   favorites: any[] = [];
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit(): void {
-    // 1. S'ABONNER AU FLUX DU SERVICE
-    // C'est ce bloc qui permet de mettre à jour la liste quand on cherche un titre
-    this.bookService.currentBooks.subscribe((books) => {
-      this.booksList = books; 
-    });
+    // Subscribe to observable lists
+    this.bookService.currentBooks.subscribe((books) => { this.booksList = books; });
+    this.bookService.currentFavorites.subscribe((favs) => { this.favorites = favs || []; });
 
-    // 1b. Suivre la liste des favoris
-    this.bookService.currentFavorites.subscribe((favs) => {
-      this.favorites = favs || [];
-    });
-
-    // 2. CHARGEMENT INITIAL (Livres d'informatique)
-    // On appelle l'API, et on envoie le résultat au service via updateBooksList
-    this.bookService.getBooks().subscribe((data) => {
-      this.bookService.updateBooksList(data.works); 
-      console.log('Livres d’informatique chargés au démarrage');
-    });
+    // Initial load: popular books
+    this.bookService.getBooks().subscribe((data) => { this.bookService.updateBooksList(data.works); });
   }
 
   isFavorite(book: any): boolean {
@@ -45,4 +34,10 @@ export class BookList implements OnInit {
   toggleFavorite(book: any) {
     this.bookService.toggleFavorite(book);
   }
-}
+
+  openDetails(book: any) {
+    if (!book || !book.key) return;
+    const id = book.key.split('/')[2];
+    this.router.navigate(['/book', id]);
+  }
+} 

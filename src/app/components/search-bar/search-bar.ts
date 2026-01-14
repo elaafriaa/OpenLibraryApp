@@ -56,7 +56,7 @@ export class SearchBar {
     });
   }
 
-  // Legacy helpers (kept for backward compatibility with templates/tests)
+  // Small adapters used by templates/tests
   onSearchTitle(title: string) { this.onSearch('title', title, null); }
   onSearchYear(year: string) { this.onSearch('title', null, year); }
 } 

@@ -1,5 +1,6 @@
 export interface Book {
-    key: string;               // L'identifiant sous forme /works/id
+  // key format: '/works/<id>' used to build detail route
+  key: string;
   title: string;
   edition_count: number;
   cover_id: number;
